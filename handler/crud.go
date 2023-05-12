@@ -105,13 +105,7 @@ func Update(c *fiber.Ctx) error {
 		Alamat: request.Alamat,
 	}
 
-	if err2 := db.Where("id = ?", id).Updates(&update); err2 != nil {
-		log.Println(err2)
-		c.Status(400)
-		return c.JSON(fiber.Map{
-			"message": err2,
-		})
-	}
+	db.Where("id = ?", id).Updates(&update)
 
 	c.Status(200)
 	return c.JSON(fiber.Map{
